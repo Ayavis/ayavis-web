@@ -1,6 +1,6 @@
 # AYAVIS Web
 
-Marketing site for AYAVIS Consulting Services. Built with Next.js 16, React Three Fiber, GSAP, and Tailwind CSS v4.
+Marketing site for AYAVIS. Built with Next.js 16, React Three Fiber, GSAP, and Tailwind CSS v4.
 
 ## Quick start
 
