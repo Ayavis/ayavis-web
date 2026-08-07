@@ -9,6 +9,9 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  images: { unoptimized: true },
   async headers() {
     return [
       {
