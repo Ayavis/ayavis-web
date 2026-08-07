@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #F4F6FB;
+  --bg-elevated: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-elevated: #F0F3FC;
+  --border: rgba(30, 50, 120, 0.08);
+  --border-strong: rgba(30, 50, 120, 0.14);
+  --text-primary: #0C0F1E;
+  --text-secondary: rgba(12, 15, 30, 0.55);
+  --text-muted: rgba(12, 15, 30, 0.35);
+  --accent: #1A4FFF;
+  --accent-warm: #C49A3C;
+  --accent-dim: rgba(26, 79, 255, 0.45);
+  --accent-glow: rgba(26, 79, 255, 0.1);
+  --line: rgba(26, 79, 255, 0.1);
+
+  /* Dark section vars */
+  --dark-bg: #050F2B;
+  --dark-text: #EDF0FF;
+  --dark-muted: rgba(237, 240, 255, 0.45);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  overflow-x: hidden;
+  font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system, sans-serif);
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(26,79,255,0.25); border-radius: 2px; }
+
+::selection {
+  background: rgba(26, 79, 255, 0.18);
+  color: var(--text-primary);
+}
+
+/* Dark sections (3D chapters) */
+.section-dark {
+  background: transparent;
+  color: var(--dark-text);
+}
+
+/* ── Keyframes ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes flow-dot {
+  0%   { stroke-dashoffset: 240; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 1.2s ease both;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
