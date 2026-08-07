@@ -3,55 +3,59 @@
 ## Build
 
 ```bash
-npm run build   # outputs to .next/
-npm run start   # serves the production build locally
+npm run build   # outputs to out/ (static export)
 ```
 
-The build produces a statically prerendered site (`○ Static`). No server-side data fetching — all content is hardcoded in `src/data/`.
+The build produces a fully static site (`output: 'export'`). All content is hardcoded in `src/data/` — no server, no API calls.
 
 ## Environment variables
 
-None required. The site has no external API calls, no forms, no analytics.
+| Variable | Required | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | No | Canonical URL for sitemap/OG tags. Defaults to `https://ayavis.com` |
+| `NEXT_PUBLIC_BASE_PATH` | No | Asset prefix for subpath deployments (e.g. `/ayavis-web`). Leave empty for custom domain |
 
-Contact link is a `mailto:` — no backend needed.
+## Hosting — GitHub Pages
 
-## Hosting
+Deployments are fully automated via GitHub Actions (`.github/workflows/deploy.yml`).
 
-Any static or Node.js host works. Recommended: **Vercel** (zero config for Next.js).
+Every push to `main` triggers: install → build → deploy to GitHub Pages.
 
-```bash
-# Via Vercel CLI
-npx vercel
-```
+### Switching between GitHub Pages subpath and custom domain
 
-Minimum requirements for any host:
-- Node.js 20+ (for `npm run build`)
-- Serve the `.next/` directory with the Next.js start command, or export as static files
+Controlled by a GitHub repository variable — no code changes needed.
 
-## Static export (optional)
+**Repo → Settings → Variables → Actions → `BASE_PATH`**
 
-If you need a pure static export with no Node.js server:
+| Target URL | `BASE_PATH` value |
+|---|---|
+| `ayavis.github.io/ayavis-web` | `/ayavis-web` |
+| `ayavis.com` (custom domain) | *(empty)* |
 
-```ts
-// next.config.ts
-const config: NextConfig = {
-  output: 'export',
-}
-```
+After changing the variable, trigger a redeploy: push a commit or use **Actions → Run workflow**.
 
-Then `npm run build` produces a static `out/` directory. Note: this disables any future server features.
+### Custom domain setup
 
-## Performance notes
+1. Add DNS records at your registrar:
+   ```
+   A      @    185.199.108.153
+   A      @    185.199.109.153
+   A      @    185.199.110.153
+   A      @    185.199.111.153
+   CNAME  www  ayavis.github.io
+   ```
+2. Repo → Settings → Pages → Custom domain → enter `ayavis.com` → Save
+3. Set `BASE_PATH` repo variable to empty
+4. Push a commit to trigger rebuild
+5. GitHub auto-provisions SSL within ~5 minutes
 
-- The 3D canvas uses `dpr: [1, 1.2]` — capped device pixel ratio prevents GPU overload on retina displays
-- Zone culling keeps at most 2 Three.js scenes rendering simultaneously
-- Lenis smooth scrolling adds ~1ms per frame — acceptable on modern hardware
-- The canvas is `pointer-events: none` so it never blocks HTML interaction
+The `public/CNAME` file (`ayavis.com`) is committed to the repo — GitHub Pages reads it to maintain the custom domain across deployments.
 
 ## Verifying a production build locally
 
 ```bash
-npm run build && npm run start
+npm run build
+npx serve out/
 ```
 
 Open `http://localhost:3000` and confirm:
@@ -60,3 +64,10 @@ Open `http://localhost:3000` and confirm:
 - Scroll drives the camera through all six zones
 - Architecture section drag and mouse parallax work
 - Approach section phases transition without overlap
+
+## Performance notes
+
+- The 3D canvas uses `dpr: [1, 1.2]` — capped device pixel ratio prevents GPU overload on retina displays
+- Zone culling keeps at most 2 Three.js scenes rendering simultaneously
+- Lenis smooth scrolling adds ~1ms per frame — acceptable on modern hardware
+- The canvas is `pointer-events: none` so it never blocks HTML interaction
