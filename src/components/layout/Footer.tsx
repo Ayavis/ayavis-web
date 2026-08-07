@@ -19,9 +19,9 @@ export default function Footer() {
       <p style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
         © {new Date().getFullYear()} AYAVIS Consulting Services
       </p>
-      <a href="mailto:hello@ayavis.com"
+      <a href="mailto:mail@ayavis.com"
         style={{ fontSize: '0.82rem', color: 'var(--text-muted)', textDecoration: 'none' }}>
-        hello@ayavis.com
+        mail@ayavis.com
       </a>
     </footer>
   )

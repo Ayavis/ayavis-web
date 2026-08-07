@@ -58,7 +58,7 @@ export default function HeroSection() {
           <Button as="a" href="#architecture" variant="primary">
             Explore the architecture
           </Button>
-          <Button as="a" href="mailto:hello@ayavis.com" variant="ghost">
+          <Button as="a" href="mailto:mail@ayavis.com" variant="ghost">
             Start a conversation
           </Button>
         </div>

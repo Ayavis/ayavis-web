@@ -68,7 +68,7 @@ export default function ContactSection() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '6rem', flexWrap: 'wrap' }}>
           <a
-            href="mailto:hello@ayavis.com"
+            href="mailto:mail@ayavis.com"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -83,7 +83,7 @@ export default function ContactSection() {
               letterSpacing: '0.01em',
             }}
           >
-            hello@ayavis.com
+            mail@ayavis.com
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

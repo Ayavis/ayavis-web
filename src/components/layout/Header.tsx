@@ -53,7 +53,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <a href="mailto:hello@ayavis.com" style={{
+        <a href="mailto:mail@ayavis.com" style={{
           display: 'none',
           fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em',
           padding: '0.45rem 1.2rem',
