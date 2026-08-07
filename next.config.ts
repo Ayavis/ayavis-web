@@ -8,10 +8,15 @@ const securityHeaders = [
   { key: 'Permissions-Policy',      value: 'camera=(), microphone=(), geolocation=()' },
 ]
 
+const isProd = process.env.NODE_ENV === 'production'
+const basePath = isProd ? '/ayavis-web' : ''
+
 const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
   images: { unoptimized: true },
+  basePath,
+  assetPrefix: basePath,
   async headers() {
     return [
       {
