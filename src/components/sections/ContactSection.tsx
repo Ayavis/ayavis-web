@@ -68,8 +68,8 @@ export default function ContactSection() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '6rem', flexWrap: 'wrap' }}>
           <a
-            href="mailto:ayavis.cs@gmail.com"
-            // href="mailto:mail@ayavis.com"
+            // href="mailto:ayavis.cs@gmail.com"
+            href="mailto:mail@ayavis.com"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
